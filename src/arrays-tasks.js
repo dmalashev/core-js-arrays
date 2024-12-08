@@ -466,8 +466,18 @@ function getHexRGBValues(arr) {
  *   getMaxItems([ 10, 2, 7, 5, 3, -5 ], 3) => [ 10, 7, 5 ]
  *   getMaxItems([ 10, 10, 10, 10 ], 3) => [ 10, 10, 10 ]
  */
-function getMaxItems(/* arr, n */) {
-  throw new Error('Not implemented');
+function getMaxItems(arr, n) {
+  const array = arr;
+  let result = [];
+
+  const getOneMax = (iterArr, iter) => {
+    result = result.concat(Math.max(...iterArr));
+    iterArr.splice(iterArr.indexOf(result[result.length - 1]), 1);
+    return iter > 1 ? getOneMax(iterArr, iter - 1) : 0;
+  };
+
+  getOneMax(array, n);
+  return arr.length > 0 ? result : [];
 }
 
 /**
